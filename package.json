@@ -1,0 +1,26 @@
+{
+  "name": "patch-files",
+  "version": "1.0.0",
+  "description": "Create a patch for file changes in node_modules",
+  "engines": {
+    "node": ">=12.18"
+  },
+  "main": "index.js",
+  "bin": {
+    "patch-files": "index.mjs"
+  },
+  "scripts": {
+    "test": "TBD"
+  },
+  "keywords": [
+    "patch",
+    "patch-files",
+    "patch-package",
+    "patch-node-modules"
+  ],
+  "author": "Ty Hopp",
+  "license": "MIT",
+  "dependencies": {
+    "undici": "^5.11.0"
+  }
+}
