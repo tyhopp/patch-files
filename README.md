@@ -36,6 +36,8 @@ You can apply patches in a `postinstall` script so patches are applied whenever 
 }
 ```
 
+You may also want to add `.patch-files-cache` to your `.gitignore`. This is where the files that are compared with the files you changed are stored.
+
 ## Todo
 
 - [ ] Tests
