@@ -6,6 +6,8 @@ Useful if you want to create patches faster than with [`patch-package`](https://
 
 ## Usage
 
+> Commands should be run from the root of your project directory.
+
 To create a patch for a single file:
 
 ```bash
@@ -17,8 +19,6 @@ To create a patch for multiple files:
 ```bash
 npx patch-files@latest node_modules/a/a.js,node_modules/b/b.js
 ```
-
-> If you use [VSCode](https://code.visualstudio.com), you can right click on a file and select "Copy Relative File" to get file path quickly.
 
 To apply patches:
 
