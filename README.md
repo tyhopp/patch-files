@@ -2,7 +2,7 @@
 
 Create and apply patches for file changes in `node_modules`.
 
-Useful if you want to create patches faster than with [`patch-package`](https://github.com/ds300/patch-package), which can be slow if you're patching a large module.
+Useful if you want to create patches faster than with [`patch-package`](https://github.com/ds300/patch-package), which is slow if you patch a large module.
 
 ## Usage
 
@@ -12,11 +12,13 @@ To create a patch for a single file:
 npx patch-files@latest node_modules/a/a.js
 ```
 
-To create a patch for a multiple file:
+To create a patch for multiple files:
 
 ```bash
 npx patch-files@latest node_modules/a/a.js,node_modules/b/b.js
 ```
+
+> If you use [VSCode](https://code.visualstudio.com), you can right click on a file and select "Copy Relative File" to get file path quickly.
 
 To apply patches:
 
@@ -24,15 +26,14 @@ To apply patches:
 npx patch-files@latest
 ```
 
-If you use [VSCode](https://code.visualstudio.com), you can right click on a file and select "Copy Relative File" to get file path quickly.
-
 You can apply patches in a `postinstall` script so patches are applied whenever you install your node modules:
 
 ```json
 {
   "scripts": {
-    "postinstall": "npx patch-files@latest`
-  },
+    "postinstall": "npx patch-files@latest"
+  }
+}
 ```
 
 ## Todo
