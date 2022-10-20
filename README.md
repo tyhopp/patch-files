@@ -2,7 +2,7 @@
 
 > This module is a work in progress, probably best not to use it yet.
 
-Create a patch for file changes in `node_modules`.
+Create and apply patches for file changes in `node_modules`.
 
 Useful if you want to create patches faster than with [`patch-package`](https://github.com/ds300/patch-package), which can be slow if you're patching a large module.
 
