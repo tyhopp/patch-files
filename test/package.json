@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test": "uvu . --ignore node_modules --bail"
+  },
+  "devDependencies": {
+    "uvu": "0.5.6"
+  }
+}

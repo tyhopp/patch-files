@@ -26,6 +26,11 @@ To apply patches:
 npx patch-files@latest
 ```
 
+Two directories are created:
+
+- `patch-files` is where patch files are written
+- `patch-files-cache` - is where the files fetched for comparison are written
+
 You can apply patches in a `postinstall` script so patches are applied whenever you install your node modules:
 
 ```json
@@ -35,8 +40,6 @@ You can apply patches in a `postinstall` script so patches are applied whenever 
   }
 }
 ```
-
-You may also want to add `.patch-files-cache` to your `.gitignore`. This is where the files that are compared with the files you changed are stored.
 
 ## Todo
 

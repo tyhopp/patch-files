@@ -6,8 +6,8 @@ import { patchDir } from "./known-paths.mjs";
 import { log } from "./log.mjs";
 
 export async function createPatch({ filePath, patchId }) {
-  const cachedFilePath = `.patch-files-cache${path.sep}${patchId}`;
-  const patchFilePath = `patches${path.sep}${patchId}.patch`;
+  const cachedFilePath = `patch-files-cache${path.sep}${patchId}`;
+  const patchFilePath = `patch-files${path.sep}${patchId}.patch`;
 
   if (!existsSync(patchDir)) {
     await mkdir(patchDir);

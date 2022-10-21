@@ -9,9 +9,6 @@
   "bin": {
     "patch-files": "index.mjs"
   },
-  "scripts": {
-    "test": "TBD"
-  },
   "keywords": [
     "patch",
     "patch-files",
