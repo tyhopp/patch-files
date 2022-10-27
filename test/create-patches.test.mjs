@@ -8,14 +8,14 @@ const fixtures = {
   a: {
     path: `node_modules/uvu/run/index.js`,
     content: fs.readFileSync(`node_modules/uvu/run/index.js`, `utf8`),
-    cache: `uvu@0.5.6~run~index.js`,
-    patch: `uvu@0.5.6~run~index.js.patch`,
+    cache: `uvu@0.5.6--run--index.js`,
+    patch: `uvu@0.5.6--run--index.js.patch`,
   },
   b: {
     path: `node_modules/uvu/run/index.mjs`,
     content: fs.readFileSync(`node_modules/uvu/run/index.mjs`, `utf8`),
-    cache: `uvu@0.5.6~run~index.mjs`,
-    patch: `uvu@0.5.6~run~index.mjs.patch`,
+    cache: `uvu@0.5.6--run--index.mjs`,
+    patch: `uvu@0.5.6--run--index.mjs.patch`,
   },
 };
 
@@ -24,8 +24,8 @@ const change = {
   b: `\n\nconst b = 2;`,
 };
 
-const patchFiles = path.resolve(`patch-files`);
-const patchFilesCache = path.resolve(`patch-files-cache`);
+const absolutePatchFilesDir = path.resolve(`patch-files`);
+const absolutePatchFilesCacheDir = path.resolve(`patch-files-cache`);
 
 test.after.each(() => {
   for (const fixture in fixtures) {
@@ -33,22 +33,26 @@ test.after.each(() => {
     fs.writeFileSync(path, content);
   }
 
-  for (const patchDir of [patchFiles, patchFilesCache]) {
+  for (const patchDir of [absolutePatchFilesDir, absolutePatchFilesCacheDir]) {
     fs.rmSync(patchDir, { recursive: true });
   }
 });
 
-test(`creates a new patch`, async () => {
+test.only(`creates a new patch`, async () => {
   fs.appendFileSync(fixtures.a.path, change.a);
 
   await createPatches([fixtures.a.path]);
 
-  const [cache] = fs.readdirSync(patchFilesCache);
-  const [patch] = fs.readdirSync(patchFiles);
-  const patchContent = fs.readFileSync(path.join(patchFiles, patch), `utf8`);
+  const [cacheFileName] = fs.readdirSync(absolutePatchFilesCacheDir);
+  const [patchFileName] = fs.readdirSync(absolutePatchFilesDir);
 
-  assert.is(cache, fixtures.a.cache);
-  assert.is(patch, fixtures.a.patch);
+  const patchContent = fs.readFileSync(
+    path.join(absolutePatchFilesDir, patchFileName),
+    `utf8`
+  );
+
+  assert.is(cacheFileName, fixtures.a.cache);
+  assert.is(patchFileName, fixtures.a.patch);
   assert.ok(patchContent.includes(change.a.trim()));
 });
 
@@ -58,15 +62,25 @@ test(`creates multiple new patches`, async () => {
 
   await createPatches([fixtures.a.path, fixtures.b.path]);
 
-  const [cacheA, cacheB] = fs.readdirSync(patchFilesCache);
-  const [patchA, patchB] = fs.readdirSync(patchFiles);
-  const patchAContent = fs.readFileSync(path.join(patchFiles, patchA), `utf8`);
-  const patchBContent = fs.readFileSync(path.join(patchFiles, patchB), `utf8`);
+  const [cacheFileNameA, cacheFileNameB] = fs.readdirSync(
+    absolutePatchFilesCacheDir
+  );
+  const [patchFileNameA, patchFileNameB] = fs.readdirSync(
+    absolutePatchFilesDir
+  );
+  const patchAContent = fs.readFileSync(
+    path.join(absolutePatchFilesDir, patchFileNameA),
+    `utf8`
+  );
+  const patchBContent = fs.readFileSync(
+    path.join(absolutePatchFilesDir, patchFileNameB),
+    `utf8`
+  );
 
-  assert.is(cacheA, fixtures.a.cache);
-  assert.is(cacheB, fixtures.b.cache);
-  assert.is(patchA, fixtures.a.patch);
-  assert.is(patchB, fixtures.b.patch);
+  assert.is(cacheFileNameA, fixtures.a.cache);
+  assert.is(cacheFileNameB, fixtures.b.cache);
+  assert.is(patchFileNameA, fixtures.a.patch);
+  assert.is(patchFileNameB, fixtures.b.patch);
   assert.ok(patchAContent.includes(change.a.trim()));
   assert.ok(patchBContent.includes(change.b.trim()));
 });
@@ -76,17 +90,17 @@ test(`creates subsequent patches the same`, async () => {
 
   await createPatches([fixtures.a.path]);
 
-  const [patchOne] = fs.readdirSync(patchFiles);
+  const [patchFileNameA] = fs.readdirSync(absolutePatchFilesDir);
   const patchContentOne = fs.readFileSync(
-    path.join(patchFiles, patchOne),
+    path.join(absolutePatchFilesDir, patchFileNameA),
     `utf8`
   );
 
   await createPatches([fixtures.a.path]);
 
-  const [patchTwo] = fs.readdirSync(patchFiles);
+  const [patchFileNameB] = fs.readdirSync(absolutePatchFilesDir);
   const patchContentTwo = fs.readFileSync(
-    path.join(patchFiles, patchTwo),
+    path.join(absolutePatchFilesDir, patchFileNameB),
     `utf8`
   );
 

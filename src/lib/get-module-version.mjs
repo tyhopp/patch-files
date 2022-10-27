@@ -1,6 +1,6 @@
 import path from "path";
 import { readFile } from "fs/promises";
-import { log } from "./log.mjs";
+import { PatchFilesError } from "./error.mjs";
 
 export async function getModuleVersion({ dir, name }) {
   try {
@@ -13,10 +13,10 @@ export async function getModuleVersion({ dir, name }) {
     const file = await readFile(packageJsonPath, `utf8`);
     const { version } = JSON.parse(file);
     return version;
-  } catch (error) {
-    log.error(
-      `Failed to get module version from package.json for module "${name}", skipping`
+  } catch (cause) {
+    throw new PatchFilesError(
+      `Failed to get module version from package.json for module "${name}"`,
+      { cause }
     );
-    return null;
   }
 }

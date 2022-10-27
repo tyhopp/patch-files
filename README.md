@@ -29,7 +29,7 @@ npx patch-files@latest
 Two directories are created:
 
 - `patch-files` is where patch files are written
-- `patch-files-cache` - is where the files fetched for comparison are written
+- `patch-files-cache` is where the files fetched for comparison are written
 
 You can apply patches in a `postinstall` script so patches are applied whenever you install your node modules:
 
@@ -41,8 +41,12 @@ You can apply patches in a `postinstall` script so patches are applied whenever 
 }
 ```
 
-## Todo
+## How is `patch-files` different from `patch-package`?
 
-- [ ] Tests
-- [ ] CI
-- [ ] Figure out why applying diffs deletes the file in `.patch-files-cache`
+The main difference is `patch-package` works by downloading an entire module from `npm` to compare your changes, while `patch-files` works by downloading just the individual file(s) from [unpkg](https://unpkg.com).
+
+For small modules, this may not have a noticable performance impact.
+
+For large modules, `patch-files` can be seconds or even minutes faster than `patch-package`.
+
+The tradeoff is `patch-files` depends on [unpkg](https://unpkg.com) in addition to the `npm` registry to work.
