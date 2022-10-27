@@ -45,8 +45,6 @@ You can apply patches in a `postinstall` script so patches are applied whenever 
 
 The main difference is `patch-package` works by downloading an entire module from `npm` to compare your changes, while `patch-files` works by downloading just the individual file(s) from [unpkg](https://unpkg.com).
 
-For small modules, this may not have a noticable performance impact.
+This approach makes the size of the module irrelevant, so creating patches from changes in large modules is much faster with `patch-files`.
 
-For large modules, `patch-files` can be seconds or even minutes faster than `patch-package`.
-
-The tradeoff is `patch-files` depends on [unpkg](https://unpkg.com) in addition to the `npm` registry to work.
+The tradeoff is `patch-files` depends on [unpkg](https://unpkg.com) instead of [npm](https://www.npmjs.com).
