@@ -7,7 +7,8 @@
   },
   "main": "index.mjs",
   "files": [
-    "index.mjs"
+    "index.mjs",
+    "src/"
   ],
   "bin": {
     "patch-files": "index.mjs"
