@@ -32,10 +32,10 @@ export async function createPatch({ filePath, patchId }) {
         log.info(`No changes to ${filePath}, skipping patch creation`);
         break;
       case 1:
-        log.success(`Successfully created patch ${patchId}.patch`);
+        log.success(`Successfully created patch ${patchId}`);
         break;
       default:
-        throw new PatchFilesError(`Failed to create patch ${patchId}.patch`, {
+        throw new PatchFilesError(`Failed to create patch ${patchId}`, {
           cause: error,
         });
     }
