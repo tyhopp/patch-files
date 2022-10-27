@@ -5,7 +5,10 @@
   "engines": {
     "node": ">=12.18"
   },
-  "main": "index.js",
+  "main": "index.mjs",
+  "files": [
+    "index.mjs"
+  ],
   "bin": {
     "patch-files": "index.mjs"
   },
