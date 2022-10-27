@@ -4,16 +4,19 @@ import { test } from "uvu";
 import * as assert from "uvu/assert";
 import { createPatches } from "../src/create-patches.mjs";
 
+const aFilePath = path.join(`node_modules`, `uvu`, `run`, `index.js`);
+const bFilePath = path.join(`node_modules`, `uvu`, `run`, `index.mjs`);
+
 const fixtures = {
   a: {
-    path: `node_modules/uvu/run/index.js`,
-    content: fs.readFileSync(`node_modules/uvu/run/index.js`, `utf8`),
+    filePath: aFilePath,
+    content: fs.readFileSync(aFilePath, `utf8`),
     cache: `uvu@0.5.6--run--index.js`,
     patch: `uvu@0.5.6--run--index.js.patch`,
   },
   b: {
-    path: `node_modules/uvu/run/index.mjs`,
-    content: fs.readFileSync(`node_modules/uvu/run/index.mjs`, `utf8`),
+    filePath: bFilePath,
+    content: fs.readFileSync(bFilePath, `utf8`),
     cache: `uvu@0.5.6--run--index.mjs`,
     patch: `uvu@0.5.6--run--index.mjs.patch`,
   },
@@ -29,8 +32,8 @@ const absolutePatchFilesCacheDir = path.resolve(`patch-files-cache`);
 
 test.after.each(() => {
   for (const fixture in fixtures) {
-    const { path, content } = fixtures[fixture];
-    fs.writeFileSync(path, content);
+    const { filePath, content } = fixtures[fixture];
+    fs.writeFileSync(filePath, content);
   }
 
   for (const patchDir of [absolutePatchFilesDir, absolutePatchFilesCacheDir]) {
@@ -38,10 +41,10 @@ test.after.each(() => {
   }
 });
 
-test.only(`creates a new patch`, async () => {
-  fs.appendFileSync(fixtures.a.path, change.a);
+test(`creates a new patch`, async () => {
+  fs.appendFileSync(fixtures.a.filePath, change.a);
 
-  await createPatches([fixtures.a.path]);
+  await createPatches([fixtures.a.filePath]);
 
   const [cacheFileName] = fs.readdirSync(absolutePatchFilesCacheDir);
   const [patchFileName] = fs.readdirSync(absolutePatchFilesDir);
@@ -57,10 +60,10 @@ test.only(`creates a new patch`, async () => {
 });
 
 test(`creates multiple new patches`, async () => {
-  fs.appendFileSync(fixtures.a.path, change.a);
-  fs.appendFileSync(fixtures.b.path, change.b);
+  fs.appendFileSync(fixtures.a.filePath, change.a);
+  fs.appendFileSync(fixtures.b.filePath, change.b);
 
-  await createPatches([fixtures.a.path, fixtures.b.path]);
+  await createPatches([fixtures.a.filePath, fixtures.b.filePath]);
 
   const [cacheFileNameA, cacheFileNameB] = fs.readdirSync(
     absolutePatchFilesCacheDir
@@ -86,9 +89,9 @@ test(`creates multiple new patches`, async () => {
 });
 
 test(`creates subsequent patches the same`, async () => {
-  fs.appendFileSync(fixtures.a.path, change.a);
+  fs.appendFileSync(fixtures.a.filePath, change.a);
 
-  await createPatches([fixtures.a.path]);
+  await createPatches([fixtures.a.filePath]);
 
   const [patchFileNameA] = fs.readdirSync(absolutePatchFilesDir);
   const patchContentOne = fs.readFileSync(
@@ -96,7 +99,7 @@ test(`creates subsequent patches the same`, async () => {
     `utf8`
   );
 
-  await createPatches([fixtures.a.path]);
+  await createPatches([fixtures.a.filePath]);
 
   const [patchFileNameB] = fs.readdirSync(absolutePatchFilesDir);
   const patchContentTwo = fs.readFileSync(
