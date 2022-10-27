@@ -17,7 +17,7 @@ export async function createPatch({ filePath, patchId }) {
 
   try {
     execSync(
-      `git diff --no-index ${absoluteCachedFilePath} ${absoluteFilePath} > ${absolutePatchFilePath}`
+      `git diff --no-index --ignore-cr-at-eol ${absoluteCachedFilePath} ${absoluteFilePath} > ${absolutePatchFilePath}`
     );
   } catch (error) {
     /**
