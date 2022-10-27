@@ -7,17 +7,17 @@ import { log } from "./log.mjs";
 import { PatchFilesError } from "./error.mjs";
 
 export async function createPatch({ filePath, patchId }) {
-  const absoluteFilePath = path.resolve(filePath);
-  const absoluteCachedFilePath = path.resolve(`patch-files-cache`, patchId);
-  const absolutePatchFilePath = path.resolve(`patch-files`, `${patchId}.patch`);
+  const cachedFilePath = path.join(`patch-files-cache`, patchId);
+  const patchFilePath = path.join(`patch-files`, `${patchId}.patch`);
 
   if (!existsSync(patchDir)) {
     await mkdir(patchDir);
   }
 
   try {
+    // Git diff prefers relative paths over absolute paths
     execSync(
-      `git diff --no-index ${absoluteCachedFilePath} ${absoluteFilePath} > ${absolutePatchFilePath}`
+      `git diff --no-index ${cachedFilePath} ${filePath} > ${patchFilePath}`
     );
   } catch (error) {
     /**
@@ -32,10 +32,10 @@ export async function createPatch({ filePath, patchId }) {
         log.info(`No changes to ${filePath}, skipping patch creation`);
         break;
       case 1:
-        log.success(`Successfully created patch ${patchId}.patch`);
+        log.success(`Successfully created patch ${patchId}`);
         break;
       default:
-        throw new PatchFilesError(`Failed to create patch ${patchId}.patch`, {
+        throw new PatchFilesError(`Failed to create patch ${patchId}`, {
           cause: error,
         });
     }

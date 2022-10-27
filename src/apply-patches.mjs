@@ -39,10 +39,10 @@ export async function applyPatches() {
        */
       switch (error.status) {
         case 0:
-          log.success(`Successfully applied patch ${patch}.patch`);
+          log.success(`Successfully applied patch ${patch}`);
           break;
         default:
-          throw new PatchFilesError(`Failed to apply patch ${patch}.patch`, {
+          throw new PatchFilesError(`Failed to apply patch ${patch}`, {
             cause: error,
           });
       }
