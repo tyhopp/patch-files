@@ -38,7 +38,7 @@ test.after.each(() => {
   }
 });
 
-test.only(`creates a new patch`, async () => {
+test(`creates a new patch`, async () => {
   fs.appendFileSync(fixtures.a.path, change.a);
 
   await createPatches([fixtures.a.path]);
