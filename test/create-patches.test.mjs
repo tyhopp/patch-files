@@ -41,6 +41,15 @@ test.after.each(() => {
   }
 });
 
+test(`does not create a patch if there is no difference`, async () => {
+  await createPatches([fixtures.a.filePath]);
+
+  assert.not(fs.existsSync(absolutePatchFilesDir));
+  assert.not(fs.existsSync(absolutePatchFilesCacheDir));
+
+  // TODO: Fix early process exit also exits test run
+});
+
 test(`creates a new patch`, async () => {
   fs.appendFileSync(fixtures.a.filePath, change.a);
 

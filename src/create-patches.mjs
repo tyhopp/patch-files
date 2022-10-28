@@ -1,19 +1,18 @@
 import path from "path";
 import { existsSync } from "fs";
-import { cwd } from "./lib/known-paths.mjs";
 import { PatchFilesError } from "./lib/error.mjs";
 import { getModulePathInfo } from "./lib/get-module-path-info.mjs";
-import { fetchFromUnpkg } from "./lib/fetch-from-unpkg.mjs";
+import { getRemoteFile } from "./lib/get-remote-file.mjs";
 import { getModuleVersion } from "./lib/get-module-version.mjs";
 import { createPatch } from "./lib/create-patch.mjs";
 
 export async function createPatches(filePaths) {
   for (const filePath of filePaths) {
-    const absoluteFilePath = path.join(cwd, filePath);
+    const absoluteFilePath = path.join(process.cwd(), filePath);
 
     if (!existsSync(absoluteFilePath)) {
       throw new PatchFilesError(
-        `File path "${filePath}" not found, paths must be relative to the project root (e.g. \`node_modules/a/a.js\`)`
+        `Local file "${filePath}" not found, paths must be relative to the project root (e.g. \`node_modules/a/a.js\`)`
       );
     }
 
@@ -34,15 +33,11 @@ export async function createPatches(filePaths) {
       ``
     );
 
-    const patchId = await fetchFromUnpkg({
+    const patchId = await getRemoteFile({
       name,
       version,
       filePath: nodeModuleRelativePath,
     });
-
-    if (!patchId) {
-      continue;
-    }
 
     await createPatch({ filePath, patchId });
   }

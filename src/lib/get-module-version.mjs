@@ -13,10 +13,9 @@ export async function getModuleVersion({ dir, name }) {
     const file = await readFile(packageJsonPath, `utf8`);
     const { version } = JSON.parse(file);
     return version;
-  } catch (cause) {
+  } catch (_) {
     throw new PatchFilesError(
-      `Failed to get module version from package.json for module "${name}"`,
-      { cause }
+      `Failed to get module version from ${packageJsonPath}`
     );
   }
 }
