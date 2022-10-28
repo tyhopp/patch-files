@@ -1,6 +1,6 @@
 {
   "name": "patch-files",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Create and apply patches for file changes in node_modules",
   "engines": {
     "node": ">=12.18"
