@@ -46,7 +46,7 @@ export async function applyPatches() {
         log.success(`Applied patch ${patch}`);
         break;
       default:
-        throw new PatchFilesError(`Failed to apply patch ${patch}`);
+        throw new PatchFilesError(`Failed to apply patch ${patch}`); // node-do-not-add-exception-line
     }
   }
 }

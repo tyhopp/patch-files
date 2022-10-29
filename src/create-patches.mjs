@@ -11,7 +11,7 @@ export async function createPatches(filePaths) {
     const absoluteFilePath = path.join(process.cwd(), filePath);
 
     if (!existsSync(absoluteFilePath)) {
-      throw new PatchFilesError(
+      throw new PatchFilesError( // node-do-not-add-exception-line
         `Local file "${filePath}" not found, paths must be relative to the project root (e.g. \`node_modules/a/a.js\`)`
       );
     }

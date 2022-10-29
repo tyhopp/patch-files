@@ -41,7 +41,7 @@ export async function createPatch({ filePath, patchId }) {
       const patch = stdout.toString();
 
       if (!patch.startsWith(`diff`)) {
-        throw new PatchFilesError(`Failed to create patch ${patchId}`);
+        throw new PatchFilesError(`Failed to create patch ${patchId}`); // node-do-not-add-exception-line
       }
 
       await writeFile(patchFilePath, patch);
@@ -49,7 +49,7 @@ export async function createPatch({ filePath, patchId }) {
       log.success(`Created patch "${patchId}"`);
       break;
     default:
-      throw new PatchFilesError(`Failed to create patch ${patchId}`);
+      throw new PatchFilesError(`Failed to create patch ${patchId}`); // node-do-not-add-exception-line
   }
 
   process.exit(0);

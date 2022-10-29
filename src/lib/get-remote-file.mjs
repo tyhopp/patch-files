@@ -44,7 +44,7 @@ export async function getRemoteFile({ name, version, filePath }) {
   } while (!complete && CDNs.length);
 
   if (!complete) {
-    throw new PatchFilesError(
+    throw new PatchFilesError( // node-do-not-add-exception-line
       `Failed to request remote file "${filePath}" for comparison`
     );
   }

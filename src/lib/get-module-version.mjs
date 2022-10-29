@@ -14,7 +14,7 @@ export async function getModuleVersion({ dir, name }) {
     const { version } = JSON.parse(file);
     return version;
   } catch (_) {
-    throw new PatchFilesError(
+    throw new PatchFilesError( // node-do-not-add-exception-line
       `Failed to get module version from ${packageJsonPath}`
     );
   }

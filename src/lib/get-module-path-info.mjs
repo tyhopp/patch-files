@@ -15,7 +15,7 @@ export function getModulePathInfo(filePath) {
       name,
     };
   } catch (_) {
-    throw new PatchFilesError(
+    throw new PatchFilesError( // node-do-not-add-exception-line
       `Failed to get module path info from ${filePath}`
     );
   }
