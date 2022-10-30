@@ -3,7 +3,7 @@ import { existsSync } from "fs";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import { log } from "./log.js";
 import { PatchFilesError } from "./error.js";
-import * as diff from "diff";
+import { createPatch as vendoredCreatePatch } from "../vendor/diff.js";
 
 export async function createPatch({ filePath, patchId }) {
   const patchDir = path.join(process.cwd(), `patch-files`);
@@ -24,7 +24,7 @@ export async function createPatch({ filePath, patchId }) {
     });
 
     const patchFilePath = path.resolve(`patch-files`, `${patchId}.patch`);
-    const patchContent = diff.createPatch(
+    const patchContent = vendoredCreatePatch(
       filePath,
       cachedFileContent,
       changedFileContent

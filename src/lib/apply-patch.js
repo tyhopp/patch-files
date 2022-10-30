@@ -3,7 +3,7 @@ import { readFile, writeFile } from "fs/promises";
 import { getRemoteFile } from "./get-remote-file.js";
 import { log } from "./log.js";
 import { PatchFilesError } from "./error.js";
-import * as diff from "diff";
+import { applyPatch as vendoredApplyPatch } from "../vendor/diff.js";
 
 export async function applyPatch(patch) {
   const patchDir = path.join(process.cwd(), `patch-files`);
@@ -30,7 +30,7 @@ export async function applyPatch(patch) {
       encoding: `utf8`,
     });
     const patchContent = await readFile(patchPath, { encoding: `utf8` });
-    const patchedFileContent = diff.applyPatch(fileContent, patchContent);
+    const patchedFileContent = vendoredApplyPatch(fileContent, patchContent);
 
     await writeFile(normalizedFilePath, patchedFileContent);
 
