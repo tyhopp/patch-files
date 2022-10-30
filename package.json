@@ -14,6 +14,7 @@
     "patch-files": "index.mjs"
   },
   "keywords": [
+    "diff",
     "patch",
     "patch-files",
     "patch-package",
