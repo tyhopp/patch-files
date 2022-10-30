@@ -6,7 +6,10 @@ Useful if you want to create patches faster than with [`patch-package`](https://
 
 ## Usage
 
-> Commands should be run from the root of your project directory.
+Keep in mind that `patch-files`:
+
+- Requires Node 18 or greater
+- Should be run from the root of your project
 
 To create a patch for a single file:
 
