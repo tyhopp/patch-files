@@ -6,13 +6,12 @@
     "node": ">=12.18"
   },
   "type": "module",
-  "main": "index.js",
+  "main": "./src/patch-files.js",
   "files": [
-    "index.js",
-    "src/"
+    "./src/"
   ],
   "bin": {
-    "patch-files": "index.js"
+    "patch-files": "./bin/patch-files.js"
   },
   "keywords": [
     "diff",
