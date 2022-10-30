@@ -2,6 +2,7 @@
   "name": "patch-files",
   "version": "5.0.0",
   "description": "Create and apply patches for file changes in node_modules",
+  "author": "Ty Hopp",
   "engines": {
     "node": ">=18"
   },
@@ -20,9 +21,5 @@
     "patch-package",
     "patch-node-modules"
   ],
-  "author": "Ty Hopp",
-  "license": "MIT",
-  "dependencies": {
-    "diff": "^5.1.0"
-  }
+  "license": "MIT"
 }
