@@ -43,7 +43,7 @@ You can apply patches in a `postinstall` script so patches are applied whenever 
 
 ## How is `patch-files` different from `patch-package`?
 
-The main difference is `patch-package` works by downloading an entire module from `npm` to compare your changes, while `patch-files` works by downloading just the individual file(s) from a CDN like [jsdelivr](https://www.jsdelivr.com/) or [unpkg](https://unpkg.com) (whichever is available).
+The main difference is `patch-package` downloads an entire module from `npm` to compare your changes, while `patch-files` downloads just the individual file(s) from a CDN like [jsdelivr](https://www.jsdelivr.com/) or [unpkg](https://unpkg.com) (whichever is available).
 
 This approach makes the size of the module irrelevant, so creating patches from changes in large modules is much faster with `patch-files`.
 
