@@ -1,5 +1,5 @@
 import path from "path";
-import { PatchFilesError } from "./error.mjs";
+import { PatchFilesError } from "./error.js";
 
 export function getModulePathInfo(filePath) {
   try {

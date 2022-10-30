@@ -2,7 +2,7 @@ import path from "path";
 import { existsSync } from "fs";
 import { mkdir, writeFile } from "fs/promises";
 import { request } from "undici";
-import { PatchFilesError } from "./error.mjs";
+import { PatchFilesError } from "./error.js";
 
 const jsdelivr = `https://cdn.jsdelivr.net/npm/`;
 const unpkg = `https://unpkg.com/`;

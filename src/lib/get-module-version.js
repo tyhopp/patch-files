@@ -1,6 +1,6 @@
 import path from "path";
 import { readFile } from "fs/promises";
-import { PatchFilesError } from "./error.mjs";
+import { PatchFilesError } from "./error.js";
 
 export async function getModuleVersion({ dir, name }) {
   try {

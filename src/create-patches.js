@@ -1,10 +1,10 @@
 import path from "path";
 import { existsSync } from "fs";
-import { PatchFilesError } from "./lib/error.mjs";
-import { getModulePathInfo } from "./lib/get-module-path-info.mjs";
-import { getRemoteFile } from "./lib/get-remote-file.mjs";
-import { getModuleVersion } from "./lib/get-module-version.mjs";
-import { createPatch } from "./lib/create-patch.mjs";
+import { PatchFilesError } from "./lib/error.js";
+import { getModulePathInfo } from "./lib/get-module-path-info.js";
+import { getRemoteFile } from "./lib/get-remote-file.js";
+import { getModuleVersion } from "./lib/get-module-version.js";
+import { createPatch } from "./lib/create-patch.js";
 
 export async function createPatches(filePaths) {
   for (const filePath of filePaths) {
