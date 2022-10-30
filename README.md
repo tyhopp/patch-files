@@ -2,7 +2,7 @@
 
 Create and apply patches for file changes in `node_modules`.
 
-Useful if you want to create patches faster than with [`patch-package`](https://github.com/ds300/patch-package), which is slow if you patch a large module.
+Smaller (4.1kb minified + gzipped) and faster than [`patch-package`](https://github.com/ds300/patch-package). See the [table of differences](#how-is-patch-files-different-from-patch-package) below for information.
 
 ## Usage
 
@@ -46,8 +46,9 @@ You can apply patches in a `postinstall` script so patches are applied whenever 
 
 ## How is `patch-files` different from `patch-package`?
 
-The main difference is `patch-package` downloads an entire module from `npm` to compare your changes, while `patch-files` downloads just the individual file(s) from a CDN like [jsdelivr](https://www.jsdelivr.com/) or [unpkg](https://unpkg.com) (whichever is available).
-
-This approach makes the size of the module irrelevant, so creating patches from changes in large modules is much faster with `patch-files`.
-
-The tradeoff is `patch-files` depends on CDN services instead of [npm](https://www.npmjs.com) directly.
+| `patch-files`                                                                                  | `patch-package`                                                                                    |
+| ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [4.1kb minified + gzipped](https://bundlephobia.com/package/patch-files@latest) (as of v6.0.0) | [124.8kb minified + gzipped](https://bundlephobia.com/package/patch-package@latest) (as of v6.5.0) |
+| 0 dependencies                                                                                 | 14 dependencies                                                                                    |
+| Downloads individual file(s)                                                                   | Downloads entire npm modules                                                                       |
+| Depends on CDNs [jsdelivr](https://www.jsdelivr.com/) or [unpkg](https://unpkg.com)            | Depends on the npm registry                                                                        |
