@@ -5,13 +5,14 @@
   "engines": {
     "node": ">=12.18"
   },
-  "main": "index.mjs",
+  "type": "module",
+  "main": "index.js",
   "files": [
-    "index.mjs",
+    "index.js",
     "src/"
   ],
   "bin": {
-    "patch-files": "index.mjs"
+    "patch-files": "index.js"
   },
   "keywords": [
     "diff",

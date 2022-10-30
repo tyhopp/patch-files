@@ -1,8 +1,8 @@
 import path from "path";
 import { existsSync } from "fs";
 import { mkdir, readFile, writeFile } from "fs/promises";
-import { log } from "./log.mjs";
-import { PatchFilesError } from "./error.mjs";
+import { log } from "./log.js";
+import { PatchFilesError } from "./error.js";
 import * as diff from "diff";
 
 export async function createPatch({ filePath, patchId }) {

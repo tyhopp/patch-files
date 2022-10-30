@@ -1,4 +1,6 @@
 {
+  "private": "true",
+  "type": "module",
   "scripts": {
     "test": "uvu . --ignore node_modules --bail"
   },

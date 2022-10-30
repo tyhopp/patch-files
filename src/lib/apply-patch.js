@@ -1,8 +1,8 @@
 import path from "path";
 import { readFile, writeFile } from "fs/promises";
-import { getRemoteFile } from "./get-remote-file.mjs";
-import { log } from "./log.mjs";
-import { PatchFilesError } from "./error.mjs";
+import { getRemoteFile } from "./get-remote-file.js";
+import { log } from "./log.js";
+import { PatchFilesError } from "./error.js";
 import * as diff from "diff";
 
 export async function applyPatch(patch) {

@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { test } from "uvu";
 import * as assert from "uvu/assert";
-import { createPatches } from "../src/create-patches.mjs";
+import { createPatches } from "../src/create-patches.js";
 
 const aFilePath = path.join(`node_modules`, `uvu`, `run`, `index.js`);
 const bFilePath = path.join(`node_modules`, `uvu`, `run`, `index.mjs`);
