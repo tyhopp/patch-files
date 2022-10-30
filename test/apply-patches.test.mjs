@@ -58,7 +58,7 @@ test.after.each(() => {
   }
 });
 
-test(`apply a patch`, async () => {
+test(`applies patches`, async () => {
   await applyPatches();
 
   const [cacheFileName] = fs.readdirSync(absolutePatchFilesCacheDir);
