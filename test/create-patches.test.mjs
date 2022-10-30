@@ -10,13 +10,13 @@ const bFilePath = path.join(`node_modules`, `uvu`, `run`, `index.mjs`);
 const fixtures = {
   a: {
     filePath: aFilePath,
-    content: fs.readFileSync(aFilePath, `utf8`),
+    fileContent: fs.readFileSync(aFilePath, `utf8`),
     cache: `uvu@0.5.6--run--index.js`,
     patch: `uvu@0.5.6--run--index.js.patch`,
   },
   b: {
     filePath: bFilePath,
-    content: fs.readFileSync(bFilePath, `utf8`),
+    fileContent: fs.readFileSync(bFilePath, `utf8`),
     cache: `uvu@0.5.6--run--index.mjs`,
     patch: `uvu@0.5.6--run--index.mjs.patch`,
   },
@@ -32,8 +32,8 @@ const absolutePatchFilesCacheDir = path.resolve(`patch-files-cache`);
 
 test.after.each(() => {
   for (const fixture in fixtures) {
-    const { filePath, content } = fixtures[fixture];
-    fs.writeFileSync(filePath, content);
+    const { filePath, fileContent } = fixtures[fixture];
+    fs.writeFileSync(filePath, fileContent);
   }
 
   for (const patchDir of [absolutePatchFilesDir, absolutePatchFilesCacheDir]) {

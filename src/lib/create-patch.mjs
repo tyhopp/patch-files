@@ -32,7 +32,7 @@ export async function createPatch({ filePath, patchId }) {
 
     await writeFile(patchFilePath, patchContent);
 
-    log.success(`Created patch "${patchId}"`);
+    log.success(`Created patch ${patchId}`);
   } catch (_) {
     throw new PatchFilesError(`Failed to create patch ${patchId}`); // node-do-not-add-exception-line
   }

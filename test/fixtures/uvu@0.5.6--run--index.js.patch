@@ -1,0 +1,13 @@
+Index: node_modules\uvu\run\index.js
+===================================================================
+--- node_modules\uvu\run\index.js
++++ node_modules\uvu\run\index.js
+@@ -9,4 +9,7 @@
+ 	});
+ 
+ 	await uvu.exec(opts.bail);
+ }
++
++
++const a = 1;
+\ No newline at end of file
