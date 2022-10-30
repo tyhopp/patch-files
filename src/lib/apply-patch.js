@@ -10,7 +10,7 @@ export async function applyPatch(patch) {
 
   try {
     const [, name, version, filePath] = patch.match(
-      /(.*?)@([\d|\.]*?)--(.*?)\.patch/
+      /(.*?)@(.*?)--(.*?)\.patch/
     );
 
     await getRemoteFile({
