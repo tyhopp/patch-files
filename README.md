@@ -46,9 +46,11 @@ You can apply patches in a `postinstall` script so patches are applied whenever 
 
 ## How is `patch-files` different from `patch-package`?
 
-| `patch-files`                                                                                  | `patch-package`                                                                                    |
-| ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| [4.1kb minified + gzipped](https://bundlephobia.com/package/patch-files@latest) (as of v6.0.0) | [124.8kb minified + gzipped](https://bundlephobia.com/package/patch-package@latest) (as of v6.5.0) |
-| 0 dependencies                                                                                 | 14 dependencies                                                                                    |
-| Downloads individual file(s)                                                                   | Downloads entire npm modules                                                                       |
-| Depends on CDNs [jsdelivr](https://www.jsdelivr.com/) or [unpkg](https://unpkg.com)            | Depends on the npm registry                                                                        |
+| `patch-files`                                                                               | `patch-package`                                                                                 |
+| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| 4.1kb minified + gzipped [as of v6.0.0](https://bundlephobia.com/package/patch-files@6.0.0) | 124.8kb minified + gzipped [as of v6.5.0](https://bundlephobia.com/package/patch-package@6.5.0) |
+| 0 dependencies                                                                              | 14 dependencies                                                                                 |
+| Downloads individual file(s)                                                                | Downloads entire npm modules                                                                    |
+| Does not depend on Git                                                                      | Depends on Git                                                                                  |
+| Relies on CDNs [jsdelivr](https://www.jsdelivr.com/) or [unpkg](https://unpkg.com)          | Relies on the npm registry                                                                      |
+| Requires Node 18 or greater                                                                 | Requires Node 10 or greater                                                                     |
