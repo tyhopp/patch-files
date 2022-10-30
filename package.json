@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "description": "Create and apply patches for file changes in node_modules",
   "engines": {
-    "node": ">=12.18"
+    "node": ">=18"
   },
   "type": "module",
   "main": "./src/patch-files.js",
@@ -23,7 +23,6 @@
   "author": "Ty Hopp",
   "license": "MIT",
   "dependencies": {
-    "diff": "^5.1.0",
-    "undici": "^5.11.0"
+    "diff": "^5.1.0"
   }
 }

@@ -1,7 +1,6 @@
 import path from "path";
 import { existsSync } from "fs";
 import { mkdir, writeFile } from "fs/promises";
-import { request } from "undici";
 import { PatchFilesError } from "./error.js";
 
 const jsdelivr = `https://cdn.jsdelivr.net/npm/`;
@@ -29,16 +28,16 @@ export async function getRemoteFile({ name, version, filePath }) {
   do {
     const CDN = CDNs.shift();
     const url = `${CDN}${patchId}`.replaceAll(path.sep, path.posix.sep);
-    const { statusCode, body } = await request(url);
+    const response = await fetch(url);
 
-    if (statusCode === 200) {
-      const fileContent = await body.text();
+    if (response.status === 200) {
+      const fileContent = await response.text();
       await writeFile(cachedFilePath, fileContent);
       complete = true;
       break;
     }
 
-    if (statusCode >= 500) {
+    if (response.status >= 500) {
       continue;
     }
   } while (!complete && CDNs.length);
