@@ -2,7 +2,7 @@
 
 Create and apply patches for file changes in `node_modules`.
 
-Smaller (4.1kb minified + gzipped) and faster than [`patch-package`](https://github.com/ds300/patch-package). See the [table of differences](#how-is-patch-files-different-from-patch-package) below for information.
+Smaller (4.1kb minified + gzipped) and faster than [`patch-package`](https://github.com/ds300/patch-package). See the [table of differences](#how-is-patch-files-different-from-patch-package) below.
 
 ## Usage
 
