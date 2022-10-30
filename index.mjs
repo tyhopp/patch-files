@@ -6,9 +6,8 @@ import { createPatches } from "./src/create-patches.mjs";
 const [filePathsString = ``] = process.argv.slice(2) || [];
 const filePaths = filePathsString ? filePathsString.split(`,`) : [];
 
-if (!filePaths.length) {
+if (filePaths.length) {
+  await createPatches(filePaths);
+} else {
   await applyPatches();
-  process.exit(0);
 }
-
-await createPatches(filePaths);

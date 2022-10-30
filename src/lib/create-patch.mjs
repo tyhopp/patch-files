@@ -1,56 +1,39 @@
 import path from "path";
 import { existsSync } from "fs";
-import { mkdir, writeFile } from "fs/promises";
-import { spawnSync } from "child_process";
+import { mkdir, readFile, writeFile } from "fs/promises";
 import { log } from "./log.mjs";
 import { PatchFilesError } from "./error.mjs";
+import * as diff from "diff";
 
 export async function createPatch({ filePath, patchId }) {
   const patchDir = path.join(process.cwd(), `patch-files`);
-
-  // Git diff prefers relative paths
-  const cachedFilePath = path.join(`patch-files-cache`, patchId);
-  const patchFilePath = path.join(`patch-files`, `${patchId}.patch`);
 
   if (!existsSync(patchDir)) {
     await mkdir(patchDir);
   }
 
-  const { stdout, status } = spawnSync(
-    `git`,
-    [`diff`, `--no-index`, cachedFilePath, filePath],
-    {
-      stdio: [`ignore`, `pipe`, `ignore`],
-    }
-  );
+  try {
+    const cachedFilePath = path.resolve(`patch-files-cache`, patchId);
+    const changedFilePath = path.resolve(filePath);
 
-  /**
-   * Git diff return codes:
-   * 0: No changes found
-   * 1: Changes found
-   * All other codes indicate an error occurred.
-   * @see {@link https://github.com/git/git/blob/e188ec3a735ae52a0d0d3c22f9df6b29fa613b1e/diff-no-index.c#L305-L309}
-   */
-  switch (status) {
-    case 0:
-      log.info(
-        `No changes found for file "${filePath}", skipping patch creation`
-      );
-      break;
-    case 1:
-      const patch = stdout.toString();
+    const cachedFileContent = await readFile(cachedFilePath, {
+      encoding: `utf8`,
+    });
+    const changedFileContent = await readFile(changedFilePath, {
+      encoding: `utf8`,
+    });
 
-      if (!patch.startsWith(`diff`)) {
-        throw new PatchFilesError(`Failed to create patch ${patchId}`); // node-do-not-add-exception-line
-      }
+    const patchFilePath = path.resolve(`patch-files`, `${patchId}.patch`);
+    const patchContent = diff.createPatch(
+      filePath,
+      cachedFileContent,
+      changedFileContent
+    );
 
-      await writeFile(patchFilePath, patch);
+    await writeFile(patchFilePath, patchContent);
 
-      log.success(`Created patch "${patchId}"`);
-      break;
-    default:
-      throw new PatchFilesError(`Failed to create patch ${patchId}`); // node-do-not-add-exception-line
+    log.success(`Created patch "${patchId}"`);
+  } catch (_) {
+    throw new PatchFilesError(`Failed to create patch ${patchId}`); // node-do-not-add-exception-line
   }
-
-  process.exit(0);
 }

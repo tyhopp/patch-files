@@ -22,6 +22,7 @@
   "author": "Ty Hopp",
   "license": "MIT",
   "dependencies": {
+    "diff": "^5.1.0",
     "undici": "^5.11.0"
   }
 }
