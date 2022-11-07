@@ -9,6 +9,7 @@ export async function applyPatches() {
 
   if (!existsSync(patchDir)) {
     log.info(`No patches to apply`);
+    return;
   }
 
   const patches = await readdir(patchDir);
