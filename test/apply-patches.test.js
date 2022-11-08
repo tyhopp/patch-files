@@ -71,4 +71,18 @@ test(`applies patches`, async () => {
   assert.is(bChangedFileContent, fixtures.b.fileContent + change.b);
 });
 
+test(`does not error if patch has already been applied`, async () => {
+  await applyPatches();
+  await applyPatches();
+
+  const [cacheFileName] = fs.readdirSync(absolutePatchFilesCacheDir);
+
+  const aChangedFileContent = fs.readFileSync(fixtures.a.filePath, `utf8`);
+  const bChangedFileContent = fs.readFileSync(fixtures.b.filePath, `utf8`);
+
+  assert.is(cacheFileName, fixtures.a.cache);
+  assert.is(aChangedFileContent, fixtures.a.fileContent + change.a);
+  assert.is(bChangedFileContent, fixtures.b.fileContent + change.b);
+});
+
 test.run();

@@ -16,6 +16,7 @@ export async function applyPatches() {
 
   if (!patches.length) {
     log.info(`No patches to apply`);
+    return;
   }
 
   for (const patch of patches) {
