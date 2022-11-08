@@ -67,8 +67,8 @@ test(`applies patches`, async () => {
   const bChangedFileContent = fs.readFileSync(fixtures.b.filePath, `utf8`);
 
   assert.is(cacheFileName, fixtures.a.cache);
-  assert.ok(aChangedFileContent.includes(change.a.trim()));
-  assert.ok(bChangedFileContent.includes(change.b.trim()));
+  assert.is(aChangedFileContent, fixtures.a.fileContent + change.a);
+  assert.is(bChangedFileContent, fixtures.b.fileContent + change.b);
 });
 
 test.run();
