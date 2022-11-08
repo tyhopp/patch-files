@@ -44,7 +44,7 @@ export async function applyPatch(patch) {
     );
 
     if (fileContent === patchedCachedFileContent) {
-      log.info(`Patch already applied`);
+      log.info(`Already applied patch ${patch}`);
       return;
     }
 
