@@ -7,7 +7,5 @@ Index: node_modules\uvu\run\index.js
  
  	await uvu.exec(opts.bail);
  }
-+
-+
 +const a = 1;
 \ No newline at end of file

@@ -29,8 +29,8 @@ const fixtures = {
 };
 
 const change = {
-  a: `\n\nconst a = 1;`,
-  b: `\n\nconst b = 2;`,
+  a: `const a = 1;`,
+  b: `const b = 2;`,
 };
 
 const absolutePatchFilesDir = path.resolve(`patch-files`);
