@@ -24,12 +24,30 @@ export async function applyPatch(patch) {
       name,
       filePath.replaceAll(`--`, path.sep)
     );
+    const cachedFilePath = path.resolve(
+      `patch-files-cache`,
+      patch.replace(`.patch`, ``)
+    );
     const patchPath = path.resolve(patchDir, patch);
 
     const fileContent = await readFile(normalizedFilePath, {
       encoding: `utf8`,
     });
+    const cachedFileContent = await readFile(cachedFilePath, {
+      encoding: `utf8`,
+    });
     const patchContent = await readFile(patchPath, { encoding: `utf8` });
+
+    const patchedCachedFileContent = vendoredApplyPatch(
+      cachedFileContent,
+      patchContent
+    );
+
+    if (fileContent === patchedCachedFileContent) {
+      log.info(`Patch already applied`);
+      return;
+    }
+
     const patchedFileContent = vendoredApplyPatch(fileContent, patchContent);
 
     await writeFile(normalizedFilePath, patchedFileContent);

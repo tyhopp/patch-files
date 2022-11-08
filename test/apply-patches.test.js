@@ -29,8 +29,8 @@ const fixtures = {
 };
 
 const change = {
-  a: `\n\nconst a = 1;`,
-  b: `\n\nconst b = 2;`,
+  a: `const a = 1;`,
+  b: `const b = 2;`,
 };
 
 const absolutePatchFilesDir = path.resolve(`patch-files`);
@@ -67,8 +67,22 @@ test(`applies patches`, async () => {
   const bChangedFileContent = fs.readFileSync(fixtures.b.filePath, `utf8`);
 
   assert.is(cacheFileName, fixtures.a.cache);
-  assert.ok(aChangedFileContent.includes(change.a.trim()));
-  assert.ok(bChangedFileContent.includes(change.b.trim()));
+  assert.is(aChangedFileContent, fixtures.a.fileContent + change.a);
+  assert.is(bChangedFileContent, fixtures.b.fileContent + change.b);
+});
+
+test(`does not error if patch has already been applied`, async () => {
+  await applyPatches();
+  await applyPatches();
+
+  const [cacheFileName] = fs.readdirSync(absolutePatchFilesCacheDir);
+
+  const aChangedFileContent = fs.readFileSync(fixtures.a.filePath, `utf8`);
+  const bChangedFileContent = fs.readFileSync(fixtures.b.filePath, `utf8`);
+
+  assert.is(cacheFileName, fixtures.a.cache);
+  assert.is(aChangedFileContent, fixtures.a.fileContent + change.a);
+  assert.is(bChangedFileContent, fixtures.b.fileContent + change.b);
 });
 
 test.run();
