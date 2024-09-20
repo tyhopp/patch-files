@@ -1,3 +1,4 @@
 node_modules
 patch-files
 patch-files-cache
+.vscode

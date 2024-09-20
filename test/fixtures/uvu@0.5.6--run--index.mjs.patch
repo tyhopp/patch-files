@@ -4,8 +4,8 @@ Index: node_modules\uvu\run\index.mjs
 +++ node_modules\uvu\run\index.mjs
 @@ -10,4 +10,7 @@
  	}
- 
+
  	await uvu.exec(opts.bail);
  }
-+const b = 2;
++const c = 3;
 \ No newline at end of file

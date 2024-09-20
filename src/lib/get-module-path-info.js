@@ -7,7 +7,10 @@ export function getModulePathInfo(filePath) {
     const deepestNodeModuleMatch = [...filePath.matchAll(`node_modules`)].pop();
     const { index, input } = deepestNodeModuleMatch;
     const deepestNodeModulePath = input.slice(index);
-    const [, name] = deepestNodeModulePath.split(path.sep);
+    const nodeModulePathParts = deepestNodeModulePath.split(path.sep);
+    const name = nodeModulePathParts[1].startsWith("@")
+      ? `${nodeModulePathParts[1]}${path.sep}${nodeModulePathParts[2]}`
+      : nodeModulePathParts[1];
     const dir = absoluteFilePath.replace(deepestNodeModulePath, ``);
 
     return {

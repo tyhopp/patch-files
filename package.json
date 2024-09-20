@@ -1,6 +1,6 @@
 {
   "name": "patch-files",
-  "version": "6.0.4",
+  "version": "6.0.5",
   "description": "Create and apply patches for file changes in node_modules",
   "author": "Ty Hopp",
   "engines": {
