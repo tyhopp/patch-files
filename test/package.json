@@ -5,6 +5,7 @@
     "test": "uvu . --ignore node_modules --bail"
   },
   "devDependencies": {
-    "uvu": "0.5.6"
+    "uvu": "0.5.6",
+    "@types/http-errors": "2.0.4"
   }
 }

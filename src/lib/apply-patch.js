@@ -9,10 +9,10 @@ export async function applyPatch(patch) {
   const patchDir = path.join(process.cwd(), `patch-files`);
 
   try {
-    const [, name, version, filePath] = patch.match(
-      /(.*?)@(.*?)--(.*?)\.patch/
+    const [, scope = "", nameScope, version, filePath] = patch.match(
+      /(^@)?(.*?)@(.*?)--(.*?)\.patch/
     );
-
+    const name = `${scope}${nameScope}`.replaceAll(`--`, path.sep);
     await getRemoteFile({
       name,
       version,

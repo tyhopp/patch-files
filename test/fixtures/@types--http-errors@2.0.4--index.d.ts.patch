@@ -1,0 +1,11 @@
+Index: node_modules/@types/http-errors/index.d.ts
+===================================================================
+--- node_modules/@types/http-errors/index.d.ts
++++ node_modules/@types/http-errors/index.d.ts
+@@ -74,4 +74,5 @@
+         & Record<"BandwidthLimitExceeded" | "509", HttpErrorConstructor<509>>
+         & Record<"NotExtended" | "510", HttpErrorConstructor<510>>
+         & Record<"NetworkAuthenticationRequire" | "511", HttpErrorConstructor<511>>;
+ }
++type a = string;
+\ No newline at end of file
